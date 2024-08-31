@@ -1,0 +1,1 @@
+cmd='/home/julien/dev3/localGMP/gmp/src/gmp/configure;--disable-shared;--enable-assert;--enable-alloca=debug;--disable-assembly;CFLAGS=-g;--enable-cxx;CXXFLAGS=-g;--prefix=/home/julien/dev3/localGMP/gmp/install'
