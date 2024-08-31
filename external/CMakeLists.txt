@@ -40,7 +40,7 @@ if(NOT libgmp)
     BUILD_COMMAND make -j${Ncpu}
     INSTALL_COMMAND make -j${Ncpu} install
     INSTALL_DIR ${gmp_INSTALL}
-    TEST_COMMAND "" #make -j${Ncpu} check
+    TEST_COMMAND make -j${Ncpu} check
     BUILD_BYPRODUCTS ${gmp_LIBRARY} #Mandatory for Ninja
   )
   ExternalProject_Get_Property(gmp SOURCE_DIR)
