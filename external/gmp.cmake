@@ -35,7 +35,7 @@ if(NOT libgmp)
     #  CFLAGS=${gmp_CFLAGS}
     #  LDFLAGS=${gmp_LDFLAGS}
       ${prefix}/src/gmp/configure 
-      --disable-shared --enable-assert --enable-alloca=debug --disable-assembly CFLAGS=-g --enable-cxx CXXFLAGS=-g
+      --disable-shared --enable-assert --enable-alloca=debug CFLAGS=-g --enable-cxx CXXFLAGS=-g
     #  --disable-debug
     #  --disable-dependency-tracking
     #  --with-pic
