@@ -4,7 +4,6 @@ endif()
 
 set(prefix ${CMAKE_CURRENT_SOURCE_DIR}/gmp)
 set(gmp_INSTALL ${prefix}/install)
-
 set(gmp_LIB_DIR ${gmp_INSTALL}/lib)
 set(gmp_LIBRARY 
   ${gmp_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}gmp${CMAKE_STATIC_LIBRARY_SUFFIX}
