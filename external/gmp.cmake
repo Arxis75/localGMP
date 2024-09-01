@@ -23,25 +23,13 @@ if(NOT libgmp)
 
   ExternalProject_Add(gmp
     PREFIX ${prefix}
-    #URL  https://github.com/alisw/GMP/archive/refs/tags/v6.2.1.tar.gz
     URL https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.gz
     URL_HASH SHA256=e56fd59d76810932a0555aa15a14b61c16bed66110d3c75cc2ac49ddaa9ab24c
     UPDATE_DISCONNECTED true  # need this to avoid constant rebuild
-    #PATCH_COMMAND 
-    #  curl "https://gist.githubusercontent.com/alecjacobson/d34d9307c17d1b853571699b9786e9d1/raw/8d14fc21cb7654f51c2e8df4deb0f82f9d0e8355/gmp-patch" "|" git apply -v
-    #${gmp_ExternalProject_Add_extra_options}
     CONFIGURE_COMMAND 
-    #  ${CMAKE_COMMAND} -E env
-    #  CFLAGS=${gmp_CFLAGS}
-    #  LDFLAGS=${gmp_LDFLAGS}
       ${prefix}/src/gmp/configure 
       --disable-shared --enable-assert --enable-alloca=debug CFLAGS=-g --enable-cxx CXXFLAGS=-g
-    #  --disable-debug
-    #  --disable-dependency-tracking
-    #  --with-pic
       --prefix=${gmp_INSTALL}
-    #  --build=${gmp_BUILD}
-    #  --host=${gmp_HOST}
     BUILD_COMMAND make -j${Ncpu}
     INSTALL_COMMAND make -j${Ncpu} install
     INSTALL_DIR ${gmp_INSTALL}
