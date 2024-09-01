@@ -6,7 +6,7 @@ set(OPENSSL_INCLUDE_DIR ${OPENSSL_INSTALL_DIR}/include)
 set(OPENSSL_CONFIGURE_COMMAND ${OPENSSL_SOURCE_DIR}/config)
 
 #find_library(libOpenSSL NAMES ssl HINTS "${prefix}/OpenSSL-prefix/src/OpenSSL-build/")
-if(FALSE)#NOT libOpenSSL)#
+if(TRUE)#NOT libOpenSSL)#
   include(ProcessorCount)
   ProcessorCount(Ncpu)
   include(ExternalProject)

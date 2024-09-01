@@ -11,4 +11,4 @@
 #add_executable(main ${HEADERS} ${SRCS})
 add_executable(main main.cpp)
 
-target_link_libraries(main PUBLIC ethash::ethash givaro::givaro OpenSSL::SSL OpenSSL::Crypto)
+target_link_libraries(main PUBLIC ethash::ethash givaro::givaro)# OpenSSL::SSL OpenSSL::Crypto)
