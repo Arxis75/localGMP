@@ -45,4 +45,4 @@ if(NOT libgivaro)
 endif()
 
 target_include_directories(givaro::givaro INTERFACE ${givaro_INCLUDE_DIR})
-target_link_libraries(givaro::givaro INTERFACE ${givaro_LIBRARY} gmp::gmp)  #the ordrer after INTERFACE is important!
+target_link_libraries(givaro::givaro INTERFACE ${givaro_LIBRARY} gmp::gmp)  #the order after INTERFACE is important!
