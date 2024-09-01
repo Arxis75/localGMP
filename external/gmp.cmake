@@ -1,15 +1,20 @@
+if(TARGET gmp::gmp)
+    return()
+endif()
+
 set(prefix ${CMAKE_CURRENT_SOURCE_DIR}/gmp)
 set(gmp_INSTALL ${prefix}/install)
-set(gmp_INCLUDE_DIR ${gmp_INSTALL}/include)
+
 set(gmp_LIB_DIR ${gmp_INSTALL}/lib)
 set(gmp_LIBRARY 
   ${gmp_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}gmp${CMAKE_STATIC_LIBRARY_SUFFIX}
   ${gmp_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}gmpxx${CMAKE_STATIC_LIBRARY_SUFFIX}
   )
+set(gmp_INCLUDE_DIR ${gmp_INSTALL}/include)
 
 find_library(libgmp NAMES gmp HINTS "${gmp_LIB_DIR}")
 if(NOT libgmp)
-  #message(FATAL_ERROR "gmp library not found")
+  message(STATUS "Third-party: creating target 'gmp::gmp'")
 
   include(FetchContent)
   include(ProcessorCount)
@@ -50,7 +55,7 @@ set(gmp_LIBRARIES ${gmp_LIBRARY})
 add_library(gmp::gmp INTERFACE IMPORTED GLOBAL)
 
 if(NOT libgmp)
-  file(MAKE_DIRECTORY ${gmp_INCLUDE_DIR})  # avoid race condition if fetching isn't completed and linkage is tried against this folder
+  file(MAKE_DIRECTORY ${gmp_INCLUDE_DIR})  # avoid race condition if building hasn't completed and linkage is tested against this folder
   add_dependencies(gmp::gmp gmp)          # builds the external project before building any reference to the library
 endif()
 
