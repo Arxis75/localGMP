@@ -4,4 +4,5 @@ build/
 external/gmp/
 external/ethash/
 external/givaro/
+external/openssl*/
 nohup.out
