@@ -27,7 +27,7 @@ int main(int argc , char *argv[])
     hash256 h = keccak256(nullptr, 0);
 
     Integer a(2);
-    int16_t b(a);
+    //int16_t b(a);
 
     EVP_CIPHER_CTX *ctx;
     ctx = EVP_CIPHER_CTX_new();
