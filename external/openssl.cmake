@@ -9,7 +9,7 @@ set(OPENSSL_INCLUDE_DIR ${OPENSSL_INSTALL_DIR}/include)
 find_library(libOpenSSL NAMES libssl.a PATHS "${OPENSSL_LIB_DIR}" NO_DEFAULT_PATH)
 find_library(libCrypto NAMES libcrypto.a PATHS "${OPENSSL_LIB_DIR}" NO_DEFAULT_PATH)
 if(NOT libOpenSSL OR NOT libCrypto)
-  message(STATUS "Third-party: creating target 'OpenSSL:OpenSSL'")
+  message(STATUS "Third-party: creating target 'OpenSSL'")
 
   include(ProcessorCount)
   ProcessorCount(Ncpu)
@@ -42,14 +42,12 @@ endif()
 # we make the include directory in advance (race condition).
 file(MAKE_DIRECTORY ${OPENSSL_INCLUDE_DIR})
 
-add_library(OpenSSL::SSL STATIC IMPORTED GLOBAL)
-set_property(TARGET OpenSSL::SSL PROPERTY IMPORTED_LOCATION ${OPENSSL_SSL_LIBRARY})
-set_property(TARGET OpenSSL::SSL PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${OPENSSL_INCLUDE_DIR})
-add_dependencies(OpenSSL::SSL OpenSSL)
-target_link_libraries(OpenSSL::SSL INTERFACE ${OPENSSL_SSL_LIBRARY})  # need the quotes to expand list
-
-add_library(OpenSSL::Crypto STATIC IMPORTED GLOBAL)
-set_property(TARGET OpenSSL::Crypto PROPERTY IMPORTED_LOCATION ${OPENSSL_CRYPTO_LIBRARY})
-set_property(TARGET OpenSSL::Crypto PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${OPENSSL_INCLUDE_DIR})
+add_library(OpenSSL::Crypto INTERFACE IMPORTED GLOBAL)
 add_dependencies(OpenSSL::Crypto OpenSSL)
-target_link_libraries(OpenSSL::Crypto INTERFACE ${OPENSSL_CRYPTO_LIBRARY})  # need the quotes to expand list
+target_include_directories(OpenSSL::Crypto INTERFACE ${OPENSSL_INCLUDE_DIR})
+target_link_libraries(OpenSSL::Crypto INTERFACE ${OPENSSL_CRYPTO_LIBRARY})
+
+#add_library(OpenSSL::SSL INTERFACE IMPORTED GLOBAL)
+#add_dependencies(OpenSSL::SSL OpenSSL)
+#target_include_directories(OpenSSL::SSL INTERFACE ${OPENSSL_INCLUDE_DIR})
+#target_link_libraries(OpenSSL::SSL INTERFACE ${OPENSSL_SSL_LIBRARY})

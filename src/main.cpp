@@ -2,7 +2,8 @@
 #include <iostream>
 #include <math.h>
 
-#include <gmp.h>
+//#include <gmp.h>
+#include <gmpxx.h>
 #include <ethash/keccak.hpp>
 #include <givaro/givinteger.h>
 
@@ -26,7 +27,7 @@ int main(int argc , char *argv[])
 
     hash256 h = keccak256(nullptr, 0);
 
-    Integer a(2);
+    Integer a("115792089237316195423570985008687907853269984665640564039457584007908834671663");
     int16_t b(a);
 
     EVP_CIPHER_CTX *ctx;

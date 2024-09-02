@@ -4,9 +4,9 @@ set(GIVARO_LIB_DIR ${GIVARO_INSTALL}/lib)
 set(GIVARO_LIBRARY ${GIVARO_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}givaro${CMAKE_STATIC_LIBRARY_SUFFIX})
 set(GIVARO_INCLUDE_DIR ${GIVARO_INSTALL}/include)
 
-find_library(libgivaro NAMES givaro PATHS "${GIVARO_LIB_DIR}" NO_DEFAULT_PATH)
+find_library(libgivaro NAMES libgivaro.a PATHS "${GIVARO_LIB_DIR}" NO_DEFAULT_PATH)
 if(NOT libgivaro)
-  message(STATUS "Third-party: creating target 'givaro::givaro'")
+  message(STATUS "Third-party: creating target 'givaro'")
 
   include(FetchContent)
   include(ProcessorCount)
@@ -33,7 +33,6 @@ if(NOT libgivaro)
     TEST_COMMAND ""
     BUILD_BYPRODUCTS ${GIVARO_LIBRARY}  #Mandatory for Ninja
   )
-  ExternalProject_Get_Property(givaro SOURCE_DIR)
 endif()
 
 # We cannot use find_library because ExternalProject_Add() is performed at build time.
@@ -42,7 +41,6 @@ endif()
 file(MAKE_DIRECTORY ${GIVARO_INCLUDE_DIR})
 
 add_library(givaro::givaro INTERFACE IMPORTED GLOBAL)
-set_property(TARGET givaro::givaro PROPERTY IMPORTED_LOCATION ${GIVARO_LIBRARY})
-set_property(TARGET givaro::givaro PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${GIVARO_INCLUDE_DIR})
-add_dependencies(givaro::givaro givaro gmp::gmp)          # builds the external project before building any reference to the library
-target_link_libraries(givaro::givaro INTERFACE ${GIVARO_LIBRARY} gmp::gmpxx gmp::gmp)  # need the quotes to expand list
+add_dependencies(givaro::givaro givaro)
+target_include_directories(givaro::givaro INTERFACE ${GIVARO_INCLUDE_DIR})
+target_link_libraries(givaro::givaro INTERFACE ${GIVARO_LIBRARY} gmp::gmpxx gmp::gmp)
