@@ -2,7 +2,7 @@ if(TARGET ethash::ethash)
     return()
 endif()
 
-set(prefix ${CMAKE_CURRENT_SOURCE_DIR}/ethash)
+set(prefix ${CMAKE_CURRENT_SOURCE_DIR}/ethash-1.0.1)
 set(ethash_INSTALL ${prefix})   #still unable to separate src/install
 set(keccak_LIB_DIR ${ethash_INSTALL}/lib/keccak)
 set(keccak_LIBRARY ${keccak_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}keccak${CMAKE_STATIC_LIBRARY_SUFFIX})

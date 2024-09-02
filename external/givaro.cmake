@@ -2,7 +2,7 @@ if(TARGET givaro::givaro)
     return()
 endif()
 
-set(prefix ${CMAKE_CURRENT_SOURCE_DIR}/givaro)
+set(prefix ${CMAKE_CURRENT_SOURCE_DIR}/givaro-4.2.0)
 set(givaro_INSTALL ${prefix}/install)
 set(givaro_LIB_DIR ${givaro_INSTALL}/lib)
 set(givaro_LIBRARY ${givaro_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}givaro${CMAKE_STATIC_LIBRARY_SUFFIX})
