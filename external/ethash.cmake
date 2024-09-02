@@ -4,7 +4,7 @@ set(KECCAK_LIB_DIR ${ETHASH_INSTALL}/lib/keccak)
 set(KECCAK_LIBRARY ${KECCAK_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}keccak${CMAKE_STATIC_LIBRARY_SUFFIX})
 set(ETHASH_INCLUDE_DIR ${prefix}/include)
 
-find_library(libkeccak NAMES keccak PATHS "${KECCAK_LIB_DIR}")
+find_library(libkeccak NAMES keccak PATHS "${KECCAK_LIB_DIR}" NO_DEFAULT_PATH)
 if(NOT libkeccak)
    message(STATUS "Third-party: creating target 'ethash::ethash'")
 

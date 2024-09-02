@@ -6,8 +6,9 @@ set(GMP_CXX_LIBRARY ${GMP_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}gmpxx${CMAKE_ST
 set(GMP_LIBRARIES ${GMP_C_LIBRARY} ${GMP_CXX_LIBRARY})
 set(GMP_INCLUDE_DIR ${GMP_INSTALL_DIR}/include)
 
-find_library(libgmp NAMES gmp PATHS "${GMP_LIB_DIR}")
-if(NOT libgmp)
+find_library(libgmp NAMES libgmp.a PATHS "${GMP_LIB_DIR}" NO_DEFAULT_PATH)
+find_library(libgmpxx NAMES libgmpxx.a PATHS "${GMP_LIB_DIR}" NO_DEFAULT_PATH)
+if(NOT libgmp OR NOT libgmpxx)
   message(STATUS "Third-party: creating target 'gmp::gmp'")
 
   include(ProcessorCount)

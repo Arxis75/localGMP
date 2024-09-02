@@ -4,7 +4,7 @@ set(GIVARO_LIB_DIR ${GIVARO_INSTALL}/lib)
 set(GIVARO_LIBRARY ${GIVARO_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}givaro${CMAKE_STATIC_LIBRARY_SUFFIX})
 set(GIVARO_INCLUDE_DIR ${GIVARO_INSTALL}/include)
 
-find_library(libgivaro NAMES givaro PATHS "${GIVARO_LIB_DIR}")
+find_library(libgivaro NAMES givaro PATHS "${GIVARO_LIB_DIR}" NO_DEFAULT_PATH)
 if(NOT libgivaro)
   message(STATUS "Third-party: creating target 'givaro::givaro'")
 
