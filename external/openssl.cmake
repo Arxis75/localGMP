@@ -42,7 +42,14 @@ endif()
 # we make the include directory in advance (race condition).
 file(MAKE_DIRECTORY ${OPENSSL_INCLUDE_DIR})
 
-add_library(OpenSSL::OpenSSL INTERFACE IMPORTED GLOBAL)
-add_dependencies(OpenSSL::OpenSSL OpenSSL)
-target_include_directories(OpenSSL::OpenSSL INTERFACE ${OPENSSL_INCLUDE_DIR})
-target_link_libraries(OpenSSL::OpenSSL INTERFACE "${OPENSSL_LIBRARIES}")  # need the quotes to expand list
+add_library(OpenSSL::SSL STATIC IMPORTED GLOBAL)
+set_property(TARGET OpenSSL::SSL PROPERTY IMPORTED_LOCATION ${OPENSSL_SSL_LIBRARY})
+set_property(TARGET OpenSSL::SSL PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${OPENSSL_INCLUDE_DIR})
+add_dependencies(OpenSSL::SSL OpenSSL)
+target_link_libraries(OpenSSL::SSL INTERFACE ${OPENSSL_SSL_LIBRARY})  # need the quotes to expand list
+
+add_library(OpenSSL::Crypto STATIC IMPORTED GLOBAL)
+set_property(TARGET OpenSSL::Crypto PROPERTY IMPORTED_LOCATION ${OPENSSL_CRYPTO_LIBRARY})
+set_property(TARGET OpenSSL::Crypto PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${OPENSSL_INCLUDE_DIR})
+add_dependencies(OpenSSL::Crypto OpenSSL)
+target_link_libraries(OpenSSL::Crypto INTERFACE ${OPENSSL_CRYPTO_LIBRARY})  # need the quotes to expand list

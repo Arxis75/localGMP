@@ -36,13 +36,13 @@ if(NOT libgivaro)
   ExternalProject_Get_Property(givaro SOURCE_DIR)
 endif()
 
+# We cannot use find_library because ExternalProject_Add() is performed at build time.
+# And to please the property INTERFACE_INCLUDE_DIRECTORIES,
+# we make the include directory in advance (race condition).
+file(MAKE_DIRECTORY ${GIVARO_INCLUDE_DIR})
+
 add_library(givaro::givaro INTERFACE IMPORTED GLOBAL)
-
-if(NOT libgivaro)
-  file(MAKE_DIRECTORY ${GIVARO_INCLUDE_DIR}) # avoid race condition if building hasn't completed and linkage is tested against this folder
-  add_dependencies(givaro gmp::gmp)          # builds gmp before building givaro
-  add_dependencies(givaro::givaro givaro)    # builds the external project before building any reference to the library
-endif()
-
-target_include_directories(givaro::givaro INTERFACE ${GIVARO_INCLUDE_DIR})
-target_link_libraries(givaro::givaro INTERFACE ${GIVARO_LIBRARY} gmp::gmp)  #the order after INTERFACE is important!
+set_property(TARGET givaro::givaro PROPERTY IMPORTED_LOCATION ${GIVARO_LIBRARY})
+set_property(TARGET givaro::givaro PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${GIVARO_INCLUDE_DIR})
+add_dependencies(givaro::givaro givaro gmp::gmp)          # builds the external project before building any reference to the library
+target_link_libraries(givaro::givaro INTERFACE ${GIVARO_LIBRARY} gmp::gmpxx gmp::gmp)  # need the quotes to expand list

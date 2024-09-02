@@ -42,6 +42,13 @@ endif()
 file(MAKE_DIRECTORY ${GMP_INCLUDE_DIR})
 
 add_library(gmp::gmp INTERFACE IMPORTED GLOBAL)
+set_property(TARGET gmp::gmp PROPERTY IMPORTED_LOCATION ${GMP_C_LIBRARY})
+set_property(TARGET gmp::gmp PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${GMP_INCLUDE_DIR})
 add_dependencies(gmp::gmp gmp)          # builds the external project before building any reference to the library
-target_include_directories(gmp::gmp INTERFACE ${GMP_INCLUDE_DIR})
-target_link_libraries(gmp::gmp INTERFACE "${GMP_LIBRARIES}")  # need the quotes to expand list
+target_link_libraries(gmp::gmp INTERFACE ${GMP_C_LIBRARY})  # need the quotes to expand list
+
+add_library(gmp::gmpxx INTERFACE IMPORTED GLOBAL)
+set_property(TARGET gmp::gmpxx PROPERTY IMPORTED_LOCATION ${GMP_CXX_LIBRARY})
+set_property(TARGET gmp::gmpxx PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${GMP_INCLUDE_DIR})
+add_dependencies(gmp::gmp gmpxx)          # builds the external project before building any reference to the library
+target_link_libraries(gmp::gmpxx INTERFACE ${GMP_CXX_LIBRARY})  # need the quotes to expand list
