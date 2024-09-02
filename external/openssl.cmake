@@ -1,5 +1,3 @@
-#return()
-
 set(prefix ${CMAKE_CURRENT_SOURCE_DIR}/openssl-3.3.0) #${CMAKE_CURRENT_BINARY_DIR})#
 set(OPENSSL_INSTALL_DIR ${prefix}/install)
 set(OPENSSL_LIB_DIR ${OPENSSL_INSTALL_DIR}/lib64)
@@ -8,8 +6,10 @@ set(OPENSSL_CRYPTO_LIBRARY ${OPENSSL_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}cryp
 set(OPENSSL_LIBRARIES ${OPENSSL_SSL_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY})
 set(OPENSSL_INCLUDE_DIR ${OPENSSL_INSTALL_DIR}/include)
 
-#find_library(libOpenSSL NAMES ssl HINTS "${prefix}/OpenSSL-prefix/src/OpenSSL-build/")
-if(TRUE)#NOT libOpenSSL)#
+find_library(libOpenSSL NAMES ssl PATHS "${OPENSSL_LIB_DIR}")
+if(NOT libOpenSSL)#TRUE)#FALSE)#
+  message(STATUS "Third-party: creating target 'OpenSSL:OpenSSL'")
+
   include(ProcessorCount)
   ProcessorCount(Ncpu)
   include(ExternalProject)
@@ -29,10 +29,10 @@ if(TRUE)#NOT libOpenSSL)#
       --prefix=${OPENSSL_INSTALL_DIR}       # replace /usr/local
       --openssldir=${OPENSSL_INSTALL_DIR}   # Cf https://wiki.openssl.org/index.php/Compilation_and_Installation
     BUILD_COMMAND make -j${Ncpu}
-    TEST_COMMAND make -j${Ncpu} test#""#
+    TEST_COMMAND ""#make -j${Ncpu} test#
     INSTALL_COMMAND make -j${Ncpu} install
     INSTALL_DIR ${OPENSSL_INSTALL_DIR}
-    BUILD_BYPRODUCTS ${OPENSSL_LIBRARIES} #Mandatory for Ninja: https://stackoverflow.com/questions/54866067/cmake-and-ninja-missing-and-no-known-rule-to-make-it
+    BUILD_BYPRODUCTS ${OPENSSL_LIBRARIES}   #Mandatory for Ninja: https://stackoverflow.com/questions/54866067/cmake-and-ninja-missing-and-no-known-rule-to-make-it
   )
 endif()
 
