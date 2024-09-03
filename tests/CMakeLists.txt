@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
-project(googletest-download NONE)
+
+project(hello_tests NONE)
 
 add_executable(main_tests main.cpp)
 
