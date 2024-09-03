@@ -1,5 +1,5 @@
-set(prefix ${CMAKE_CURRENT_SOURCE_DIR}/givaro-4.2.0)
-set(GIVARO_INSTALL ${prefix}/install)
+set(GIVARO_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/givaro-4.2.0)
+set(GIVARO_INSTALL ${GIVARO_PREFIX}/install)
 set(GIVARO_LIB_DIR ${GIVARO_INSTALL}/lib)
 set(GIVARO_LIBRARY ${GIVARO_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}givaro${CMAKE_STATIC_LIBRARY_SUFFIX})
 set(GIVARO_INCLUDE_DIR ${GIVARO_INSTALL}/include)
@@ -13,17 +13,17 @@ if(NOT libgivaro)
   ProcessorCount(Ncpu)
   include(ExternalProject)
 
-  set(GIVARO_SOURCE_DIR ${prefix}/src/givaro)
+  set(GIVARO_SOURCE_DIR ${GIVARO_PREFIX}/src/givaro)
 
   ExternalProject_Add(
     givaro
     SOURCE_DIR ${OPENSSL_SOURCE_DIR}
-    PREFIX ${prefix}                  #replace ${CMAKE_CURRENT_BINARY_DIR}
+    PREFIX ${GIVARO_PREFIX}                  #replace ${CMAKE_CURRENT_BINARY_DIR}
     URL https://github.com/linbox-team/givaro/releases/download/v4.2.0/givaro-4.2.0.tar.gz
     URL_HASH SHA256=865e228812feca971dfb6e776a7bc7ac959cf63ebd52b4f05492730a46e1f189
     UPDATE_DISCONNECTED true          # need this to avoid constant rebuild
     CONFIGURE_COMMAND 
-      ${prefix}/src/givaro/configure
+      ${GIVARO_PREFIX}/src/givaro/configure
       --disable-shared CFLAGS=-g CXXFLAGS=-g
       --prefix=${GIVARO_INSTALL}      #replace /usr/local
       --with-gmp=${CMAKE_CURRENT_SOURCE_DIR}/gmp-6.3.0/install

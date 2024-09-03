@@ -5,4 +5,5 @@ external/gmp*/
 external/ethash*/
 external/givaro*/
 external/openssl*/
+external/googletest*/
 nohup.out

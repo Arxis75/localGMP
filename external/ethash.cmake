@@ -1,9 +1,9 @@
-set(prefix ${CMAKE_CURRENT_SOURCE_DIR}/ethash-1.0.1)
-set(ETHASH_INSTALL ${prefix})   #still unable to separate src/install
+set(ETHASH_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/ethash-1.0.1)
+set(ETHASH_INSTALL ${ETHASH_PREFIX})   #still unable to separate src/install
 set(ETHASH_LIB_DIR ${ETHASH_INSTALL}/lib)
 set(ETHASH_KECCAK_LIBRARY ${ETHASH_LIB_DIR}/keccak/${CMAKE_STATIC_LIBRARY_PREFIX}keccak${CMAKE_STATIC_LIBRARY_SUFFIX})
 set(ETHASH_ETHASH_LIBRARY ${ETHASH_LIB_DIR}/ethash/${CMAKE_STATIC_LIBRARY_PREFIX}ethash${CMAKE_STATIC_LIBRARY_SUFFIX})
-set(ETHASH_INCLUDE_DIR ${prefix}/include)
+set(ETHASH_INCLUDE_DIR ${ETHASH_PREFIX}/include)
 
 find_library(libethash NAMES libethash.a PATHS "${ETHASH_LIB_DIR}/ethash" NO_DEFAULT_PATH)
 find_library(libkeccak NAMES libkeccak.a PATHS "${ETHASH_LIB_DIR}/keccak" NO_DEFAULT_PATH)

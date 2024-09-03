@@ -1,5 +1,5 @@
-set(prefix ${CMAKE_CURRENT_SOURCE_DIR}/gmp-6.3.0) #${CMAKE_CURRENT_BINARY_DIR})#
-set(GMP_INSTALL_DIR ${prefix}/install)
+set(GMP_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/gmp-6.3.0) #${CMAKE_CURRENT_BINARY_DIR})#
+set(GMP_INSTALL_DIR ${GMP_PREFIX}/install)
 set(GMP_LIB_DIR ${GMP_INSTALL_DIR}/lib)
 set(GMP_C_LIBRARY ${GMP_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}gmp${CMAKE_STATIC_LIBRARY_SUFFIX})      # C library, mandatory for Givaro
 set(GMP_CXX_LIBRARY ${GMP_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}gmpxx${CMAKE_STATIC_LIBRARY_SUFFIX})  # C++ library
@@ -15,12 +15,12 @@ if(NOT libgmp OR NOT libgmpxx)
   ProcessorCount(Ncpu)
   include(ExternalProject)
 
-  set(GMP_SOURCE_DIR ${prefix}/src/gmp)
+  set(GMP_SOURCE_DIR ${GMP_PREFIX}/src/gmp)
   
   ExternalProject_Add(
     gmp
     SOURCE_DIR ${OPENSSL_SOURCE_DIR}
-    PREFIX ${prefix}                  #replace ${CMAKE_CURRENT_BINARY_DIR}
+    PREFIX ${GMP_PREFIX}                  #replace ${CMAKE_CURRENT_BINARY_DIR}
     URL https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.gz
     URL_HASH SHA256=e56fd59d76810932a0555aa15a14b61c16bed66110d3c75cc2ac49ddaa9ab24c
     UPDATE_DISCONNECTED true          # need this to avoid constant rebuild
