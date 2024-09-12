@@ -1,4 +1,4 @@
-set(GTest_PREFIX ${CMAKE_BINARY_DIR}-external/googletest-1.15.2) #${CMAKE_CURRENT_BINARY_DIR})#
+set(GTest_PREFIX ${CMAKE_SOURCE_DIR}/build-external/googletest-1.15.2) #${CMAKE_CURRENT_BINARY_DIR})#
 set(GTest_TMP_DIR ${GTest_PREFIX}/tmp)
 set(GTest_STAMP_DIR ${GTest_PREFIX}/stamp)
 set(GTest_SRC_DIR ${GTest_PREFIX}/src)

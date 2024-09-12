@@ -1,4 +1,5 @@
-set(ETHASH_PREFIX ${CMAKE_BINARY_DIR}-external/ethash-1.0.1)
+#set(ETHASH_PREFIX ${CMAKE_BINARY_DIR}-external/ethash-1.0.1)
+set(ETHASH_PREFIX ${CMAKE_SOURCE_DIR}/build-external/ethash-1.0.1)
 set(ETHASH_INSTALL ${ETHASH_PREFIX})   #still unable to separate src/install
 set(ETHASH_LIB_DIR ${ETHASH_INSTALL}/lib)
 set(ETHASH_KECCAK_LIBRARY ${ETHASH_LIB_DIR}/keccak/${CMAKE_STATIC_LIBRARY_PREFIX}keccak${CMAKE_STATIC_LIBRARY_SUFFIX})
@@ -18,7 +19,7 @@ if(NOT libethash OR NOT libkeccak)
         UPDATE_DISCONNECTED true  # need this to avoid constant rebuild
         BINARY_DIR "${ETHASH_INSTALL}"
         SOURCE_DIR "${ETHASH_INSTALL}"
-        #SUBBUILD_DIR "${ETHASH_INSTALL}-subbuild"
+        SUBBUILD_DIR "${ETHASH_INSTALL}-subbuild"
     )
     FetchContent_MakeAvailable(ethash)
 else()
