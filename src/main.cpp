@@ -1,38 +1,11 @@
-#include <stdio.h>
-#include <iostream>
-#include <math.h>
+#include "mainwindow.h"
 
-//#include <gmp.h>
-#include <gmpxx.h>
-#include <ethash/keccak.hpp>
-#include <givaro/givinteger.h>
+#include <QApplication>
 
-#include <openssl/conf.h>
-#include <openssl/evp.h>
-#include <openssl/kdf.h>
-#include <openssl/hmac.h>
-#include <openssl/err.h>
-#include <openssl/params.h>
-#include <openssl/core_names.h>
-#include <openssl/aes.h>
-#include <openssl/modes.h>
-
-using namespace ethash;
-using namespace Givaro;
-
-int main(int argc , char *argv[])
-{  
-    mpz_t pi; 
-    mpz_init_set_str (pi, "3141592653589793238462643383279502884", 10);
-
-    hash256 h = keccak256(nullptr, 0);
-
-    Integer a("115792089237316195423570985008687907853269984665640564039457584007908834671663");
-    int16_t b(a);
-
-    EVP_CIPHER_CTX *ctx;
-    ctx = EVP_CIPHER_CTX_new();
-    EVP_EncryptInit_ex(ctx, EVP_aes_128_gcm(), NULL, NULL, NULL);
-
-    return 0;
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
 }
