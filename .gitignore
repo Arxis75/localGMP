@@ -76,12 +76,5 @@ CMakeLists.txt.user*
 # --------
 __pycache__
 .env
-build/
-docs/
-external/gmp*/
-external/ethash*/
-external/givaro*/
-external/openssl*/
-external/googletest*/
-external/doxygen*/
+build*/
 nohup.out

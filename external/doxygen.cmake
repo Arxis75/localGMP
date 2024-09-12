@@ -4,10 +4,10 @@ if(BUILD_DOC)
         MESSAGE(STATUS "Doxygen found: ${DOXYGEN_EXECUTABLE} -- ${DOXYGEN_VERSION}")
         # Set Doxygen input and output files.
         SET(DOXYGEN_INPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-        SET(DOXYGEN_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/docs)
+        SET(DOXYGEN_OUTPUT_DIR ${CMAKE_BINARY_DIR}-docs)
         SET(DOXYGEN_INDEX_FILE ${DOXYGEN_OUTPUT_DIR}/xml/index.xml)
         SET(DOXYFILE_IN ${DOXYGEN_INPUT_DIR}/Doxyfile.in)
-        SET(DOXYFILE_OUT ${CMAKE_CURRENT_SOURCE_DIR}/doxygen-${DOXYGEN_VERSION}/Doxyfile)
+        SET(DOXYFILE_OUT ${CMAKE_BINARY_DIR}-external/doxygen-${DOXYGEN_VERSION}/Doxyfile)
         # Generate DoxyFile from the input file.
         CONFIGURE_FILE(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
         # Create Output directory.

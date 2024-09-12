@@ -1,4 +1,4 @@
-set(GIVARO_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/givaro-4.2.0)
+set(GIVARO_PREFIX ${CMAKE_BINARY_DIR}-external/givaro-4.2.0)
 set(GIVARO_INSTALL ${GIVARO_PREFIX}/install)
 set(GIVARO_LIB_DIR ${GIVARO_INSTALL}/lib)
 set(GIVARO_LIBRARY ${GIVARO_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}givaro${CMAKE_STATIC_LIBRARY_SUFFIX})
@@ -26,7 +26,7 @@ if(NOT libgivaro)
       ${GIVARO_PREFIX}/src/givaro/configure
       --disable-shared CFLAGS=-g CXXFLAGS=-g
       --prefix=${GIVARO_INSTALL}      #replace /usr/local
-      --with-gmp=${CMAKE_CURRENT_SOURCE_DIR}/gmp-6.3.0/install
+      --with-gmp=${CMAKE_BINARY_DIR}-external/gmp-6.3.0/install
     BUILD_COMMAND make -j${Ncpu}
     INSTALL_COMMAND make -j${Ncpu} install
     INSTALL_DIR ${GIVARO_INSTALL}
